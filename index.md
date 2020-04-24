@@ -1,6 +1,14 @@
-## Welcome to GitHub Pages
+## Welcome to my final STAT 184 final project website!
 
-You can use the [editor on GitHub](https://github.com/ljbasom/ljbasom.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+For this final project, I posed the question:
+
+**Could relevant firearm permit numbers for a series of years have some explanation for trends in violent crime in the United States as well as hunting trends in Pennsylvania?**
+
+In order to answer these questions, I was able to find 3 data sources from various locations on the Internet that give enough information to create some useful plots. If you would like to see them, please click the following links:
+
+* [NICS Firearm Data](https://raw.githubusercontent.com/BuzzFeedNews/nics-firearm-background-checks/master/data/nics-firearm-background-checks.csv)
+* [Pennsylvania Hunting Data](https://raw.githubusercontent.com/ljbasom/Final-Project/master/PAHuntingData.csv)
+* [United States Crime Data](https://raw.githubusercontent.com/ljbasom/Final-Project/master/USCrime.csv)
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
