@@ -10,3 +10,6 @@ In order to answer these questions, I was able to find 3 data sources from vario
 * [Pennsylvania Hunting Data](https://raw.githubusercontent.com/ljbasom/Final-Project/master/PAHuntingData.csv)
 * [United States Crime Data](https://raw.githubusercontent.com/ljbasom/Final-Project/master/USCrime.csv)
 
+To view all of the files in one location, as well as see different stages of my progress, please visit my [Final Project Github repository](https://github.com/ljbasom/Final-Project).
+
+Below you will find a fully functional version of my final project, created directly from my Final Project notebook HTML file!
