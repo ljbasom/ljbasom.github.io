@@ -6,21 +6,23 @@ output: html_notebook
 
 ## Research Question
 
-The reasearch question I am choosing to ask is:
+The research question I chose to ask for this project is:
 
-**Could relevant firearm permit numbers in a year have some explanation for trends in violent crime data and hunting data?**
+**Could relevant firearm permit numbers for a series of years have some explanation for trends in violent crime in the United States as well as hunting trends in Pennsylvania?**
 
-By choosing to ask this type of question, I will need to find AT LEAST 3 relevant data sets and think of ways to combine them to create graphs and statistics that help to answer parts of this question.
+These questions are important ones to answer, because they can provide insight into how legal gun sales could affect illegal activity (such as violent crime), and possibly correlate gun sales with success in hunting certain animals, specifically in Pennsylvania.
 
-My first (and primary) data source will be the firarm permit data, because it will separately be related to my other two data sources. My second data source will be the hunting data, and my third data source will be the violent crime data in the United States.
+By choosing to ask this type of question, I needed to find AT LEAST 3 relevant data sets and think of ways to combine them to create graphs and statistics that help to answer parts of this question.
 
-I will look at how increases in certain types of firearm permits could relate to increases in hunting data, and how firearm permits for certain states can relate to violent crime within those states over certain periods of time, and if these fluctuations in both data tend to increase and decrease together, or mutually.
+My first (and primary) data source is firearm permit data, because it needed to be separately to my other two data sources. My second data source is hunting data, and my third data source is violent crime data in the United States.
+
+I then needed to look at how increases in certain types of firearm permits could relate to increases in hunting data, and how firearm permits for certain states can relate to violent crime within those states over certain periods of time, and if these fluctuations in both data tend to increase and decrease together, or mutually.
 
 ## Data Sources
 
 ### Load required packages
 
-Before beginning my analysis, I need to load relevant packages that will allow my data to be loaded with the least problems and stored in a clean way, as well as ones that will give me the ability to create graphics and plots that show trends and patterns in the data. Packages that will help with this project (whether they will be used or not) are `ggplot2`, `tidyr`, `mosaic`, `DataComputing`, `readr`, and `data.table`.
+Before beginning my analysis, I needed to load relevant packages that would allow my data to be loaded with the least problems and stored in a clean way, as well as packages that would give me the ability to create graphics and plots that show trends and patterns in the data. Packages that helped with this project (whether they were used or not) are `ggplot2`, `tidyr`, `mosaic`, `DataComputing`, `readr`, and `data.table`.
 
 ```{r}
 install.packages("data.table")
@@ -37,29 +39,29 @@ library(data.table)
 
 ### Finding data sets
 
-I will have to search for reputable and adequate data sources to match the three data sets that I intend to use in this project. After some time in searching with certain criteria in mind, I was able to find 3 sources. My primary data source was found from a routinely maintained Github repository that collects NICS firearm data over the years and constantly updates each month. My second source is Pennsylvania hunting data straight from the Pennsylvania Game Commission website, and my third data set is crime data for the 50 United States and the District of Columbia from the FBI Uniform Crime Reporting Statistics website.
+I had to search for reputable and adequate data sources to match the three data sets that I chose to use in this project. After some time in searching with certain criteria in mind, I was able to find 3 sources. My primary data source was found from a routinely maintained GitHub repository that collects NICS firearm data over the years and constantly updates each month. My second source is Pennsylvania hunting data straight from the Pennsylvania Game Commission website, and my third data set is crime data for the 50 United States and the District of Columbia from the FBI Uniform Crime Reporting Statistics website.
 
 #### Primary data:
 
 The NICS Firearm Background Check Data is my primary data set for 3 main reasons:
 
-1. The data encompasses all U.S. states and territories, making it easy to look at trends for individual states over the years.
+1. The data encompasses all U.S. states and territories, which made it easy to look at trends for individual states over the years.
 
-2. The data has many variables relating to different types of guns, and includes many types of sales, like regular sales, private sales, returned sales, and many others.
+2. The data has many variables relating to different types of guns, and includes many types of sales, like regular sales, private sales, returned sales, as well as many others.
 
 3. The data breaks each year down into months and by state, so it is very specific and encompasses a large range of detail and information.
 
-The data within this data set comes directly from the FBI National Instant Criminal Background Check System (NICS), and is collected and maintained from that website by Buzzfeed News with great documentation and reputability. 
+The data within this data set comes directly from the FBI National Instant Criminal Background Check System (NICS) and is collected and maintained from that website by Buzzfeed News with great documentation and reputability. 
 
-The NICS data was collected to keep a very close estimate of firearm sales and possession per state and how that number has been increasing/decreasing over time. The data collection began (by the FBI) in **1998**, and has been consistenly collected and updated from 1998 until currently (**the latest data is from March of 2020**).
+The NICS data was collected to keep a very close estimate of firearm sales and possession per state and how that number has been increasing/decreasing over time. The data collection began (by the FBI) in **1998**, and has been consistently collected and updated from 1998 until currently (**the latest data is from March of 2020**).
 
 Each case in the data is uniquely defined by year, month, and state, so every case shows the count of certain types of permits for a certain state or territory in a given month of a year. There are **14,135** cases in the most updated state of the data set that I will be using for this project.
 
-From all variables in this data set, I will be using the ones most relevant to either of the two secondary data sets that I will be using. There are three categories for guns in the NICS data: handgun, long gun, and other. For the hunting data, I will be using variables that relate to the most common types of guns used in hunting, like `long_gun`, `other`, `prepawn_long_gun`, `prepawn_other`, etc. For the crime data, I will most likely take a look at `handgun`, `prepawn_handgun`, etc. because handguns are the most common firearm used in crime, but I may also look into all types of firearms to see how the trends change.
+From all variables in this data set, I will be using the ones most relevant to either of the two secondary data sets that I will be using. There are three categories for guns in the NICS data: handgun, long gun, and other. For the hunting data, I will be using NICS variables that relate to the most common types of guns used in hunting, like `long_gun`, `other`, `prepawn_long_gun`, `prepawn_other`, etc. For the crime data, I will look at `handgun`, `prepawn_handgun`, etc. because handguns are the most common firearm used in crime, but I may also investigate all types of firearms to see how the trends change.
 
-Since this data set encompasses many less years than the other two data sets, I will most likely need to filter out a lot of the earlier rows in the other data sets in order to make relevant inferences when comparing data from two sets.
+Since this data set encompasses many less years than the other two data sets, I will need to filter out a lot of the earlier rows in the other data sets in order to make relevant inferences when comparing data from two sets.
 
-To load the data set from the Github URL, I will use `read_csv()` to create a `NICS` table:
+To load the data set from the GitHub URL, I used `read_csv()` to create a `NICS` table:
 
 ```{r}
 NICS_URL <- "https://raw.githubusercontent.com/BuzzFeedNews/nics-firearm-background-checks/master/data/nics-firearm-background-checks.csv"
@@ -69,7 +71,7 @@ NICS <- read_csv(NICS_URL)
 head(NICS, 10)
 ```
 
-In order to group by month and year more easily, we will need to clean the `NICS` data by splitting the `month` column into `Month` and `Year`, using `extractMatches()` and `rename()` to create these two new columns:
+In order to group by month and year more easily, I needed to clean the `NICS` data by splitting the `month` column into `Month` and `Year`, using `extractMatches()` and `rename()` to create these two new columns:
 
 ```{r}
 NICS <- 
@@ -77,7 +79,9 @@ NICS <-
   extractMatches("(..$)", month) %>%
   rename("Month" = match1) %>%
   extractMatches("(^....)", month) %>%
-  rename("Year" = match1)
+  rename("Year" = match1) %>%
+  transform(Year, Year = as.character(Year)) %>%
+  transform(Month, Month = as.character(Month))
 ```
 
 ```{r}
@@ -88,13 +92,13 @@ NICS %>%
   head(10)
 ```
 
-As we can see from this summary, our data now has `Month` and `Year` columns that reflect a split in the `month` column (which follows the format "YYYY-MM").
+As we can see from this summary, the NICS data now has `Month` and `Year` columns that reflect a split in the `month` column (which follows the format "YYYY-MM").
 
 #### Other data sources:
 
-I was able to find a useful table on the Pennsylvania Game Commission website for hunting data in Pennsylvania. This data is collected and maintained by the PA Game Commission by measuring the number of tags for each killed animal that is reported (tag collected). The table on the website is titled "White-Tailed Deer, Bear, & Wild Turkey Harvest Information". The data contains information for years spanning **1915 through 2015**, so I am assuming that it has not been updated recently (but still relevant for the years that it contains). This data was collected with the goal of watching trends in hunting data for each provided species of animal over the years. A case in this data represents the amount of tags collected for each species of animal in a given year, and there are **101 cases**. Variables that I plan on using from this data set are `year`, `Total Deer`, and `Fall Turkey Harvest`, because these are the largest values and those that would be most relevant to the NICS data.
+I was able to find a useful table on the Pennsylvania Game Commission website for hunting data in Pennsylvania. This data is collected and maintained by the PA Game Commission by measuring the number of tags for each killed animal that is reported (tag collected). The table on the website is titled "White-Tailed Deer, Bear, & Wild Turkey Harvest Information". The data contains information for years spanning **1915 through 2015**, so I am assuming that it has not been updated recently (but still relevant for the years that it contains). This data was collected with the goal of watching trends in hunting data for each provided species of animal over the years. A case in this data represents the amount of tags collected for each species of animal in a given year and there are **101 cases**. Variables that I will use from this data set are `year`, `Total Deer`, and `Fall Turkey Harvest`, because these are the largest values and those that would be most relevant to the NICS data.
 
-To import this table to RStudio, I first had to copy and paste the table into an Excel spreadsheet. I then cleaned the data by changing empty cells to "0" and removing all comma values. I also changed the variable names to have spaces removed. After cleaning the data a bit, I saved the Excel spreadsheet to my desktop as a CSV file, uploaded it to my Final Project Gihub repo, and used the `read_csv()` function to import the data table with the Gibhub link,  which ended up being successful. I saved this table as `PAHunting`.
+To import this table to RStudio, I first had to copy and paste the table into an Excel spreadsheet. I then cleaned the data by changing empty cells to "0" and removing all comma values. I also changed the variable names to have spaces removed. After cleaning the data a bit, I saved the Excel spreadsheet to my desktop as a CSV file, uploaded it to my Final Project GitHub repo, and used the `read_csv()` function to import the data table with the GitHub link,  which ended up being successful. I saved this table as `PAHunting`.
 
 ```{r}
 PAHunting_URL <- "https://raw.githubusercontent.com/ljbasom/Final-Project/master/PAHuntingData.csv"
@@ -104,9 +108,9 @@ PAHunting <- read_csv(PAHunting_URL)
 head(PAHunting, 10)
 ```
 
-My final data source is crime data from the FBI Uniform Crime Reporting Statistics (UCR) website. This division of the FBI collects crime data for each state on a year-by-year basis. The website has a helpful table builder tool that allows its users to select different aspects of the data to be put into a table that can be exported. For example, users can select any state or states that they desire, and different types of crime (or all types) that they want to be displayed in the data table. This data is collected and maintained by the FBI, and was collected to measure trends and changes in different types of crime across all states and the District of Columbia over a large span of years (**1960-2014**). I chose to create  tables that show crime data for all states and the District of Columbia (individually). A case in these tables that I created represents counts of different types of crimes for a certain year in the relevant state that the table is made for, and there are **55 cases** in each table (other than New York, which has **50 cases**), one for each year between 1960 and 2014 (and 1965 to 2014 for New York). Since all of these 51 tables were created separately (but shared the same variables), I was able to combine them within an Excel spreadsheet, add a new variable called `State`, and export this new combined table as a "csv" file to my desktop. When relating this data to the NICS data, I plan on using variables related to crime that would most likely be committed by a firearm. This would encompass variables like `Year`, `Population`, `Violent crime total` and then more specific variables related to certain types of violent crime.
+My final data source is crime data from the FBI Uniform Crime Reporting Statistics (UCR) website. This division of the FBI collects crime data for each state on a year-by-year basis. The website has a helpful table builder tool that allows its users to select different aspects of the data to be put into a table that can be exported. For example, users can select any state or states that they desire, and different types of crime (or all types) that they want to be displayed in the data table. This data is collected and maintained by the FBI and was collected to measure trends and changes in different types of crime across all states and the District of Columbia over a large span of years (**1960-2014**). I chose to create tables that show crime data for all states and the District of Columbia (individually). A case in these tables that I created represents counts of different types of crimes for a certain year in the relevant state that the table is made for, and there are **55 cases** in each table (other than New York, which has **50 cases**), one for each year between 1960 and 2014 (and 1965 to 2014 for New York). Since all of these 51 tables were created separately (but shared the same variables), I was able to combine them within an Excel spreadsheet, add a new variable called `State`, and export this new combined table as a "csv" file to my desktop. When relating this data to the NICS data, I will use variables related to crime that would most likely be committed by a firearm. This would encompass variables like `Year`, `Population`, `Violent crime total` and then more specific variables related to certain types of violent crime.
 
-To load the table into RStudio, I simply saved the combined table I created from the FBI UCR website to my desktop as a CSV file, uploaded it to my Final Project Github repo, and imported it the same way as I imported the PA hunting table, using `read_csv()`. I saved this table as `USCrime`.
+To load the table into RStudio, I simply saved the combined table I created from the FBI UCR website to my desktop as a CSV file, uploaded it to my Final Project GitHub repo, and imported it the same way as I imported the PA hunting table, using `read_csv()`. I saved this table as `USCrime`.
 
 ```{r}
 USCrime_URL <- "https://raw.githubusercontent.com/ljbasom/Final-Project/master/USCrime.csv"
@@ -119,51 +123,51 @@ head(USCrime, 10)
 
 ## Exploring intuition
 
-In order to get a good grounding for this project and start on the right path, I need to do some preliminary plotting and observations to find direction and motivation for the work that I will be doing with these data sets in the near future. 
+In order to get a good grounding for this project and start on the right path, I needed to do some preliminary plotting and observations to find direction and motivation for the work that I planned with these data sets further into the project. 
 
-To start I want to look at the `NICS` data and filter it by `state`, using New Jersey to create graphs that begin to show trends in handgun permits by year for solely the NICS data:
+To start, I wanted to look at the `NICS` data and filter it by `state`, using New Jersey to create graphs that begin to show trends in handgun permits by year for solely the NICS data:
 
 ```{r}
 NICS %>%
   group_by(Year) %>%
-  filter(state=="New Jersey") %>%
+  filter(state=="New Jersey", Year > 1998) %>%
   summarise(Total = sum(handgun)) %>%
-  ggplot(aes(x=Year, y=Total)) + geom_point() + theme(axis.text.x=element_text(angle=60,hjust=1))
+  ggplot(aes(x=Year, y=Total)) + geom_point() + theme(axis.text.x=element_text(angle=60,hjust=1)) + ggtitle("New Jersey Handgun Permits") + xlab("Year") + ylab("# of Handgun Permits")
 ```
 
 Based on this nice graph, we can see that separating the `month` variable into `Month` and `Year` allowed us to make interesting plots when we group by the year. 
 
 This plot shows us that the number of handgun permits was fairly steady from 1999 through about 2007, and then started to increase rapidly from 2008 through 2013, and then was kind of all over the place since then.
 
-Another interesting thing we can realize from this plot is that the 2020 data point seems to be strangely low. That is because the year 2020 has data, but the year is not over yet, so the sum of handgun permits will naturally be lower in most cases. Until the 2020 data is complete for 12 months, we should probably refrain from including the year 2020 in creating plots like this.
+Another interesting thing we can realize from this plot is that the 2020 data point seems to be strangely low. That is because the year 2020 has data, but the year is not over yet, so the sum of handgun permits will naturally be lower in most cases. Until the 2020 data is complete for 12 months, I need to refrain from including the year 2020 in creating plots like this.
 
-For our next plot, we can look at the `USCrime` table to produce a plot of `Year` versus the proportion of violent crime to population (`Violent_crime_rate`) to make sure we account for increase in population, for 1999 through 2014 in New Jersey:
+For our next plot, we can look at the `USCrime` table to produce a plot of `Year` versus the proportion of violent crime to population (`Violent_crime_rate`) to make sure we account for increase in population, for 1960 through 2014 in New Jersey:
 
 
 ```{r}
 USCrime %>%
   filter(State == "New Jersey") %>%
-  ggplot(aes(x=as.integer(Year), y=Violent_Crime_rate)) + geom_point() + geom_smooth(span=.3)+ theme(axis.text.x=element_text(angle=60,hjust=1))
+  ggplot(aes(x=as.integer(Year), y=Violent_Crime_rate)) + geom_point() + geom_smooth(span=.3)+ theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("New Jersey Violent Crime") + xlab("Year") + ylab("Violent Crime Rate")
 ```
 
-From this plot, we can see an interesting trend in the rate of violent crime in New Jersey from 1960 to 2014. While violent crime rates were on an upward trend for many years, they seemed to have peaked in 1990-1992 and have been consistently declining ever since. It will be interesting to see if the same trend will be observed within the NICS data for New Jersey, because the handgun data seems to follow a somewhat similar trend. It rises for a while, but instead of declning consistently, it seems to bounce between highs and lows for a while with numbers all over the place. This NICS handgun data does not take population into account, so we will be able to get a better understanding of trends once we can join the `NICS` and `USCrime` tables to have population become a bigger factor in the NICS data for New Jersey.
+From this plot, we can see an interesting trend in the rate of violent crime in New Jersey from 1960 to 2014. While violent crime rates were on an upward trend for many years, they seemed to have peaked in 1990-1992 and have been consistently declining ever since. It will be interesting to see if the same trend will be observed within the NICS data for New Jersey, because the handgun data seems to follow a somewhat similar trend. It rises for a while, but instead of declining consistently, it seems to bounce between highs and lows for a while with numbers all over the place. This NICS handgun data does not take population into account, so we will be able to get a better understanding of trends once we can join the `NICS` and `USCrime` tables to have population become a bigger factor in the NICS data for New Jersey.
 
 Let's now create a plot that shows the same information, only for the California crime data:
 
 ```{r}
 USCrime %>%
   filter(State == "California") %>%
-  ggplot(aes(x=as.integer(Year), y=Violent_Crime_rate)) + geom_point() + geom_smooth(span=.3)+ theme(axis.text.x=element_text(angle=60,hjust=1))
+  ggplot(aes(x=as.integer(Year), y=Violent_Crime_rate)) + geom_point() + geom_smooth(span=.3)+ theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("California Violent Crime") + xlab("Year") + ylab("Violent Crime Rate")
 ```
 
 From the plot above, we can see a crime rate over the years that is very similar to the New Jersey crime rate plot. 
 
-To make this comparison more clear and valid (instead of simply looking at two separate plots), we should make a plot that shows both New Jersey and California crime data, and create the same plot with color of the glyphs pertaining to the variable `State`:
+To make this comparison more clear and valid (instead of simply looking at two separate plots), we can make a plot that shows both New Jersey and California crime data, and create the same plot with color of the glyphs pertaining to the variable `State`:
 
 ```{r}
 USCrime %>%
   filter(State == c("New Jersey", "California")) %>%
-  ggplot(aes(x=as.integer(Year), y=Violent_Crime_rate)) + geom_point(aes(color=State)) + geom_smooth(span=.3, aes(color=State))+ theme(axis.text.x=element_text(angle=60,hjust=1))
+  ggplot(aes(x=as.integer(Year), y=Violent_Crime_rate)) + geom_point(aes(color=State)) + geom_smooth(span=.3, aes(color=State))+ theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("NJ & CA Violent Crime") + xlab("Year") + ylab("Violent Crime Rate")
 ```
 
 This plot makes it easier to visualize and compare the violent crime rate over the years in both New Jersey and California. Since crime rate is simply the number of instances of crime divided by population, we can conclude that per capita, there is much more crime in California than there is in New Jersey, but both states had a crime rate peak (increase to decrease) around 1991-1993.
@@ -193,23 +197,144 @@ rate_labeller <- c(
 
 CrimeRate %>%
   filter(State == c("New Jersey", "California")) %>%
-  ggplot(aes(x=Year,y=Crime_Rate))+aes(colour=State)+facet_wrap(~Crime_Type,ncol=4, scales = "free", labeller = labeller(Crime_Type = rate_labeller)) + stat_smooth(method=loess) + theme(axis.text.x=element_text(angle=60,hjust=1))
+  ggplot(aes(x=Year,y=Crime_Rate))+aes(colour=State)+facet_wrap(~Crime_Type,ncol=4, scales = "free", labeller = labeller(Crime_Type = rate_labeller)) + stat_smooth(method=loess) + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("NJ & CA Crime") + xlab("Year") + ylab("Crime Rate")
 ```
 
-For our final plot in this intial observation of our data, we will look at the Pennsylvania hunting data. I want to see if the rates of deer and turkey harvest are rising and falling steadily. To do this, I will mutate a new variable that divides `Fall_Turkey_Harvest` by `Total_Deer` and plots this proportion over all years. If the line is flat, we can conclude that these numbers do tend to move together. If it slopes up, that means the number of turkeys goes up faster than the number of deer over the years, and if it slopes down, that means the number of deer goes up faster than the number of turkeys over the years:
+For our final plot in this initial observation of our data, we will look at the Pennsylvania hunting data. I want to see if the rates of deer and turkey harvest are rising and falling steadily. To do this, I will mutate a new variable that divides `Fall_Turkey_Harvest` by `Total_Deer` and plots this proportion over all years. If the line is flat, we can conclude that these numbers do tend to move together. If it slopes up, that means the number of turkeys goes up faster than the number of deer over the years, and if it slopes down, that means the number of deer goes up faster than the number of turkeys over the years:
 
 ```{r}
 PAHunting %>% 
   mutate(proportion = Fall_Turkey_Harvest/Total_Deer) %>%
-  ggplot(aes(x=Year, y=proportion)) + ylim(-1, 3) + geom_point()+ geom_smooth()+ theme(axis.text.x=element_text(angle=60,hjust=1))
+  ggplot(aes(x=Year, y=proportion)) + ylim(-1, 3) + geom_point()+ geom_smooth()+ theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("PA Turkey and Deer Hunting") + xlab("Year") + ylab("Proportion (Turkey/Deer)")
 ```
 
 This graph shows while at first the proportion was more strongly weighted by turkey (almost twice as many for a few years), this proportion evened out around 1930 and has stayed fairly consistent since then, meaning that the rates of success in turkey hunting and deer hunting have changed with one another since 1930.
 
+## Research Question Analysis
+
+After sourcing data, cleaning it up, and performing somewhat preliminary and exploratory visualizations with the data, we need to revisit our initial research question in order to attempt to answer it with our data:
+
+**Could relevant firearm permit numbers for a series of years have some explanation for trends in violent crime in the United States as well as hunting trends in Pennsylvania?**
+
+Let's look at this question piece-by-piece, first addressing the aspect of violent crime correlations and then look at Pennsylvania hunting trends.
+
+### Firearm Permits vs. Violent Crime
+
+In order to infer any sort of relationship between firearm permit numbers and violent crime rates over the years, we need to first think about what we're looking at. Due to differences in the range of years for the `NICS` and `USCrime` datasets, we need to limit the range from the lower bound of the NICS data to the upper bound of the US crime data (1999 to 2015).The first step to this process would be to select a certain state to analyze. Let's look at New Jersey and New York, which I chose randomly:
+
+```{r}
+NICS %>%
+  filter(state == c("New Jersey", "New York"), as.integer(Year) <= 2015, as.integer(Year) > 1998) %>%
+  group_by(Year, state) %>%
+  summarise(Total=sum(handgun)) %>%
+  ggplot(aes(x=as.integer(Year), y=Total, colour=state)) + geom_point() + geom_smooth() + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("NJ & NY Handgun Permits") + xlab("Year") + ylab("# of Handgun Permits")
+```
+
+After creating this plot, we can create another plot that looks at violent crime rate over the years in the same states (New Jersey and New York):
+
+```{r}
+USCrime %>%
+  filter(State == c("New Jersey", "New York"), as.integer(Year) >= 1999) %>%
+  ggplot(aes(x=as.integer(Year),y=Violent_Crime_rate))+geom_point() + geom_smooth()+aes(colour=State) + ggtitle("NJ & NY Violent Crime") + xlab("Year") + ylab("Violent Crime Rate")
+```
+
+When comparing these plots, I find it interesting that while the count of handgun permits issued from 1998 to 2014 in New Jersey and New York increased by large factors (from 2 to almost 6 times growth), the violent crime rates for these states cut almost in half over these years. This seems to show that there is no positive correlation between these two variables (handgun permits and violent crime rate), which implies that there must be a negative correlation or no correlation at all. To dig further into this analysis, I want to plot a trend line for all states in terms of violent crime rate and handgun permit numbers, and see if the entire United States follows the same trends for both variables (instead of simply looking at two states):
+
+```{r}
+NICS %>%
+  filter(as.integer(Year) <= 2015, as.integer(Year) >= 1999) %>%
+  group_by(Year, state) %>%
+  summarise(Total=sum(handgun)) %>%
+  ggplot(aes(x=as.integer(Year), y=Total)) + geom_point() + geom_smooth() + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("US Handgun Permits") + xlab("Year") + ylab("# of Handgun Permits")
+```
+
+```{r}
+USCrime %>%
+  filter(as.integer(Year) >= 1999) %>%
+  ggplot(aes(x=as.integer(Year),y=Violent_Crime_rate))+geom_point() + geom_smooth() + ggtitle("US Violent Crime") + xlab("Year") + ylab("Violent Crime Rate")
+```
+
+By looking at trends in violent crime rate and handgun permits for all of the United States over the years of 1998 to 2014, it is clear that violent crime has been on a consistent downward trend and handgun permits have been on a steady rise. For example, the average violent crime rate in 1999 was around 500, and by 2014 this value was closer to 350. On the contrary, the average number of gun permits in 1999 was around 50,000, and by 2014 this value was closer to 140,000. These observations show that, at least from data spanning 1999 to 2014, violent crime rates and handgun permits do not rise together. We would need to use more detailed statistical software to prove that there is no correlation (or to show a negative correlation), but within the constraints of this final project, it seems clear that violent crime rates are not positively correlated with handgun permits. Just to make sure that violent crime isn't the only crime rate that follows this pattern from the `USCrime` data set, let's use the `CrimeRate` table to produce a faceted plot showing all crime rates in the United States for the same time period (1999 to 2014):
+
+```{r}
+CrimeRate %>%
+  filter(as.integer(Year) >= 1999) %>%
+  ggplot(aes(x=Year,y=Crime_Rate))+facet_wrap(~Crime_Type,ncol=4, scales = "free", labeller = labeller(Crime_Type = rate_labeller)) + stat_smooth(method=loess) + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("United States Crime") + xlab("Year") + ylab("Crime Rate")
+```
+
+As we can see from the plot above, violent crime was not the only type of crime that has been on a steady decline from 1998 to 2014 in the United States. In fact, all types of crime in our US crime data have been declining over this period of time, so we can conclude that NO types of crime rate are positive correlated with handgun permits in the United States for this period of time. Let's also check if long gun permits follow a similar trend as handgun permits, so we can make sure there is no correlation between crime rate and long gun permits for the United States from 1998 to 2014:
+
+```{r}
+NICS %>%
+  filter(as.integer(Year) <= 2015, as.integer(Year) > 1998) %>%
+  group_by(Year, state) %>%
+  summarise(Total=sum(long_gun)) %>%
+  ggplot(aes(x=as.integer(Year), y=Total)) + geom_point() + geom_smooth() + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("US Long Gun Permits") + xlab("Year") + ylab("# of Long Gun Permits")
+```
+
+As we can see, long gun permits have actually remained relatively constant over this time period, so we can also conclude that for the combined United States over the years of 1999 to 2014, the amount of handgun and long gun firearm permits issued does not positively correlate with crime rate for any type of crime in our US crime dataset (including aggravated assault, burglary, larceny, vehicle theft, rape, murder, property crime, robbery, and violent crime).
+
+### Firearm Permits vs. PA Hunting Trends
+
+Now that we have answered the first part of our research question, we can look into finding a correlation between the number firearm permits and hunting trends in Pennsylvania from 1999 to 2015. To begin this analysis, we must first plot hunting trends in Pennsylvania over this time (and specify which type of animal that the data represents by using colored glyphs). I noticed that turkey harvest numbers are separated into spring and fall, so I will first mutate a new variable that is called `Total_Turkey`, which will be a combination of `Spring_Turkey_Harvest` and `Fall_Turkey_Harvest`:
+
+```{r}
+PAHunting <-
+  PAHunting %>%
+  mutate(Total_Turkey = Spring_Turkey_Harvest + Fall_Turkey_Harvest) %>%
+  select(Year, Total_Deer, Bear_Harvest, Total_Turkey)
+
+PAHunting %>%
+  filter(Year >1998)
+```
+
+I will also narrow the data to make new variables `Animal_Type` and `Harvest_Count` that show the type (deer, bear, turkey) and the number of those animals harvested for the given year (so there will be 3 unique cases for each year):
+
+```{r}
+Narrow_Hunting <-
+  PAHunting %>%
+  pivot_longer(cols = c(Total_Deer, Total_Turkey, Bear_Harvest), names_to = "Animal_Type", values_to = "Harvest_Count")
+
+Narrow_Hunting
+```
+
+Now, we can create a plot that shows trends in deer, turkey, and bear hunting from 1999 to 2015 as a scatterplot with smooth lines:
+
+```{r}
+animal_labeller <- c(Bear_Harvest = "Bear",
+                     Total_Deer = "Deer",
+                     Total_Turkey = "Turkey")
+
+Narrow_Hunting %>%
+  filter(Year >= 1999, Harvest_Count > 0) %>%
+  ggplot(aes(x=Year,y=Harvest_Count))+facet_wrap(~Animal_Type,ncol=4, scales = "free", labeller = labeller(Crime_Type = animal_labeller)) + geom_point() + stat_smooth(method=loess) + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("PA Hunting Data") + xlab("Year") + ylab("Harvest Count")
+```
+
+This plot seems to be all over the place, and the bear harvest is following opposite trends when compared to turkey and deer harvests, with missing data after 2010. Because of this, I will choose to only look at turkey and deer harvests when making a comparison:
+
+```{r}
+Narrow_Hunting %>%
+  filter(Year >= 1999, Harvest_Count > 0, Animal_Type != "Bear_Harvest") %>%
+  ggplot(aes(x=Year,y=Harvest_Count))+facet_wrap(~Animal_Type,ncol=4, scales = "free", labeller = labeller(Crime_Type = animal_labeller)) + geom_point() + stat_smooth(method=loess) + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("PA Hunting Data") + xlab("Year") + ylab("Harvest Count")
+```
+
+That looks much better. Now we just need a plot of long gun permit data in Pennsylvania for the same years, 1999 to 2015:
+
+```{r}
+NICS %>%
+  group_by(Year) %>%
+  filter(state=="Pennsylvania", Year <= 2015, Year >= 1999) %>%
+  summarise(Total = sum(long_gun)) %>%
+  ggplot(aes(x=as.integer(Year), y=Total)) + geom_point() + geom_smooth() + theme(axis.text.x=element_text(angle=60,hjust=1))+ ggtitle("PA Long Gun Permits") + xlab("Year") + ylab("# of Long Gun Permits")
+```
+
+From looking this plot alone and comparing it to the faceted PA hunting data plot for deer and turkey, we can see that there is not a strong correlation between turkey and deer hunting numbers and long gun permit numbers over the years of 1999 to 2015, if any. What we can conclude is that deer and turkey harvest numbers in PA have been on a steep decline over these 16 years, while long gun sales seem to have increased slightly (except for severe drops in number in 2014 and 2015). Again, like in the crime data aspect of the question, we can conclude that there is no positive correlation between long gun permit numbers and deer and turkey harvest numbers, at least in the state of Pennsylvania from 1999 to 2015. I am slightly disappointed that neither aspects of my questions could be answered by showing a positive correlation between variables of separate tables, but I am happy to be able to know for sure that there is no correlation by actually manipulating data tables, creating visual aids, and then using those tools to reach conclusions.
+
 ## Closing remarks
 
-I feel very confident after completing this stage of my final project. Although I have the challenge of working alone and doing everything by myself, I was able to successfully find three relevant data sets, one primary that I will be spending a majority of the analysis working on, and two supporting data sets to look into with the help of the primary data set.
+Finally, we can look back on all of the tables and plots and see what we learned. I think that we did a good job in terms of answering the research question, but perhaps got answers that were not what we were expecting or hoping for. For example, we found that violent crime rate (or any crime rate, for that matter) in the United States is not positively correlated with handgun or long gun permit numbers for the years of 1999 to 2015. A technical challenge of discovering the possibility of a negative correlation between this data was my lack of understanding how to perform correlation tests on R, and especially how to do so with data in 2 different plots. Clearly, I would have had to join the tables together to do this, but I did not join the tables due to the fact that I did not know how to perform a correlation test. 
 
-Moving from this point, I have some more work to do. After completing many of the plots in the code above, I've realized that almost none of them pertain to the research question that I've asked, so I need to make sure I am refining the plots and visuals to answer certain aspects of my research question, or modify my research question to better fit the plots that I produced (especially in terms of US crime data). I also want to find ways to combine the hunting data and the gun permit data, as well as find ways to link the crime data with the gun permit data, and create visuals for these relationships.
+For the hunting data aspect of the research question, I found that turkey and deer harvest is not positively correlated to long gun permit numbers in Pennsylvania from 1999 to 2015. A technical challenge that I faced( and was not able to overcome) was finding a more populated hunting dataset for Pennsylvania. I also would have liked to use a span of more than 16 years for this hunting data, since it was only for one state, but was limited by the range of the NICS data set starting in 1999, as well as the hunting data set ending in 2015. 
 
-Although my work in this stage of the project is somewhat cloudy and diverges from the main research question(s), I remain optimistic that I will easily be able to refine and clean-up my work by the time this project is done. I did some interesting things with R functions when making some of the plots like mutating variables, binding two tables together by their rows, narrowing the crime data by using crime type and rate, and creating faceted multi-variable plots that show important relationships in comparing crime rates between two states. I think with this level of data wrangling and visual creations, I should be able to stick with what I know (and what I have done in this code) and modify it to create plots that answer the initial research question more specifically.
+
+To answer my research question and wrap up this project, I can conclude that **relevant firearm permit numbers do not have any significant explanation for trends in violent crime in the United States or hunting trends in Pennsylvania over the years of 1999 to 2015**. After choosing to complete this final project on my own and dedicating many hours to sourcing data, cleaning tables, and creating interesting plots, I can look back and say that I am both proud and slightly bothered by my work. I am proud of the fact that I was able to find lots of interesting data and come up with questions that relate the tables to one another, and I am proud of the problem solving and hard work that was required to clean, narrow, filter and manipulate my data to fit plots that can answer those important questions. The thing that leaves me feeling slightly bothered by finishing this project is the fact that outside of the bounds of time and project constraints, so much more could have been done to give this data justice and to answer my research questions with more depth. If I had more time and knowledge, I would have attempted to fit regression models to my data and find actual values for levels of correlation between variables. I would have also tried to find more data that could explain trends in violent crime rates for certain states other than just the NICS data, like political data, poverty and unemployment data, etc.
